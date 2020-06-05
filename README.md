@@ -45,4 +45,4 @@ The datasets used contain real messages that were sent during disaster events. I
 Type a message such as: Hurricane lead to water and food shortage in costa rica
 
 
-![Example](Example.png)
+![Example](Example.PNG)
