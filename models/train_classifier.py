@@ -18,7 +18,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.ensemble import AdaBoostClassifier
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.externals import joblib
+import pickle
 
 import nltk
 nltk.download('punkt')
@@ -79,19 +79,18 @@ def build_model():
     """
     ada_pipeline =  Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
-        ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier((AdaBoostClassifier())))
     ])
     # grid search parameters
-    parameters = {
-    'tfidf__norm':['l2','l1'],
+    '''parameters = {
     'vect__stop_words': ['english',None],
     'clf__estimator__learning_rate' :[0.1, 0.5, 1, 2],
     'clf__estimator__n_estimators' : [50, 60, 70],
-    }
+    }'''
     #create grid search object
-    clf_grid_model = GridSearchCV(ada_pipeline, parameters)
-    return clf_grid_model
+    #clf_grid_model = GridSearchCV(ada_pipeline, parameters)
+	
+    return ada_pipeline
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
@@ -120,7 +119,8 @@ def save_model(model, model_filepath):
         model_filepath: location to store the model
     Output: None
     """
-    joblib.dump(model, model_filepath)
+    pkl_out = open(model_filepath,"wb")
+    pickle.dump(model, pkl_out)
 
 
 
