@@ -39,3 +39,10 @@ The datasets used contain real messages that were sent during disaster events. I
     `python run.py`
 
 3. Go to http://0.0.0.0:3001/
+
+### Example 
+
+Type a message such as: Hurricane lead to water and food shortage in costa rica
+
+
+![Example](Example.png)
