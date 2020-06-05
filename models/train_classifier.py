@@ -79,19 +79,20 @@ def build_model():
     """
     ada_pipeline =  Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
+	('tfidf', TfidfTransformer()),    
         ('clf', MultiOutputClassifier((AdaBoostClassifier())))
     ])
     # grid search parameters
-    #parameters = {
-    #	'tfidf__norm':['l2','l1'],
-    #'vect__stop_words': ['english',None],
-    #'clf__estimator__learning_rate' :[0.1, 0.5, 1, 2],
-    #'clf__estimator__n_estimators' : [50, 60, 70],
-    #}
+    parameters = {
+    	'tfidf__norm':['l2','l1'],
+    'vect__stop_words': ['english',None],
+    'clf__estimator__learning_rate' :[0.1, 0.5, 1, 2],
+    'clf__estimator__n_estimators' : [50, 60, 70],
+    }
     #create grid search object
-    #clf_grid_model = GridSearchCV(ada_pipeline, parameters)
+    clf_grid_model = GridSearchCV(ada_pipeline, parameters)
 	
-    return ada_pipeline
+    return clf_grid_model
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
